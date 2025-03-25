@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyngo - Aprende Ciberseguridad de Forma Divertida</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #f0f4f8;
+        }
+        @keyframes gemShine {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(10deg); }
+        }
+        @keyframes streak {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes levelUp {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1) rotate(5deg); }
+        }
+        @keyframes backgroundGlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .gem-icon {
+            animation: gemShine 2s infinite;
+            transition: all 0.3s ease;
+        }
+        .streak-bar {
+            background: linear-gradient(90deg, #FFD700, #FFA500, #FF6347);
+            background-size: 200% 200%;
+            animation: streak 5s ease infinite;
+        }
+        .level-badge {
+            animation: levelUp 1.5s ease-in-out infinite;
+        }
+        .module-card {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.2) 0%, transparent 70%);
+            transform: rotate(-45deg);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .module-card:hover::before {
+            opacity: 1;
+        }
+        .module-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        .progress-bar {
+            background: linear-gradient(90deg, #1cb0f6, #58cc02);
+            background-size: 200% 200%;
+            animation: backgroundGlow 3s ease infinite;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <nav class="container mx-auto flex justify-between items-center p-4">
+            <div class="flex items-center">
+                <h1 class="text-2xl font-bold text-[#1cb0f6]">Cyngo</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="flex items-center bg-[#e5f3ff] rounded-full px-3 py-1">
+                    <i class="fas fa-gem text-yellow-500 mr-2 gem-icon"></i>
+                    <span class="text-[#1cb0f6] font-bold">120</span>
+                </div>
+                <div class="streak-bar rounded-full px-3 py-1 text-white">
+                    <i class="fas fa-fire mr-2"></i>
+                    <span class="font-bold">5 días</span>
+                </div>
+                <a href="https://duosec-823e0.web.app/" class="bg-[#58cc02] text-white px-4 py-2 rounded-full hover:bg-[#46a302] transition">
+                    Iniciar Beta
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <section class="text-center mb-16 relative">
+            <div class="absolute top-0 left-0 right-0 bottom-0 overflow-hidden pointer-events-none">
+                <div class="absolute top-1/4 left-1/4 w-32 h-32 bg-[#1cb0f6]/20 rounded-full blur-2xl animate-pulse"></div>
+                <div class="absolute bottom-1/4 right-1/4 w-48 h-48 bg-[#58cc02]/20 rounded-full blur-2xl animate-pulse"></div>
+            </div>
+            <h2 class="text-5xl font-bold mb-6 text-[#1cb0f6] relative z-10">Aprende Ciberseguridad<br>Jugando</h2>
+            <p class="text-xl text-gray-600 mb-8 relative z-10">Cyngo: Tu compañero divertido para convertirte en un experto en seguridad digital</p>
+            <div class="flex justify-center space-x-4 relative z-10">
+                <a href="https://duosec-823e0.web.app/" class="bg-[#1cb0f6] text-white px-6 py-3 rounded-full hover:bg-[#0f9ade] transition pulse-effect">
+                    Iniciar Beta
+                </a>
+            </div>
+        </section>
+
+        <section class="grid md:grid-cols-3 gap-6 mb-16">
+            <div class="bg-white rounded-2xl p-6 text-center shadow-md hover:shadow-xl transition group">
+                <div class="bg-[#eff5ff] rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 group-hover:rotate-360 transition-transform duration-500">
+                    <i class="fas fa-shield-alt text-4xl text-[#1cb0f6]"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2 text-[#1cb0f6]">Aprendizaje Interactivo</h3>
+                <p>Módulos de ciberseguridad diseñados como juegos divertidos y desafiantes</p>
+            </div>
+            <div class="bg-white rounded-2xl p-6 text-center shadow-md hover:shadow-xl transition group">
+                <div class="bg-[#eff5ff] rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 group-hover:rotate-360 transition-transform duration-500">
+                    <i class="fas fa-laptop-code text-4xl text-[#1cb0f6]"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2 text-[#1cb0f6]">Contenido Práctico</h3>
+                <p>Ejercicios basados en escenarios reales de seguridad informática</p>
+            </div>
+            <div class="bg-white rounded-2xl p-6 text-center shadow-md hover:shadow-xl transition group">
+                <div class="bg-[#eff5ff] rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 group-hover:rotate-360 transition-transform duration-500">
+                    <i class="fas fa-users text-4xl text-[#1cb0f6]"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2 text-[#1cb0f6]">Comunidad</h3>
+                <p>Conecta con otros aprendices y expertos en ciberseguridad</p>
+            </div>
+        </section>
+
+        <section id="modules" class="mt-16">
+            <h2 class="text-4xl font-bold text-center mb-10 text-[#1cb0f6]">Nuestros Módulos de Aprendizaje 🔒</h2>
+            
+            <div class="space-y-6">
+                <div class="module-card bg-white rounded-2xl shadow-md overflow-hidden">
+                    <div class="flex items-center justify-between p-6 bg-[#1cb0f6] text-white cursor-pointer" onclick="toggleModule(this)">
+                        <div class="flex items-center space-x-4">
+                            <div class="level-badge bg-white text-[#1cb0f6] rounded-full w-10 h-10 flex items-center justify-center font-bold">
+                                1
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">Privacidad en Redes Sociales 👥</h3>
+                                <p class="text-sm text-blue-100">Módulo Básico</p>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-down module-toggle"></i>
+                    </div>
+                    <div class="module-content hidden p-6 bg-blue-50">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <p class="mb-4">Aprende a proteger tu identidad digital y gestionar tu privacidad en las redes sociales.</p>
+                                <ul class="space-y-2 text-blue-600">
+                                    <li>🔐 Configuración de privacidad</li>
+                                    <li>🚫 Identificación de riesgos</li>
+                                    <li>🛡️ Estrategias de protección</li>
+                                </ul>
+                            </div>
+                            <div class="flex flex-col items-center justify-center space-y-4">
+                                <div class="flex items-center">
+                                    <i class="fas fa-gem text-yellow-500 mr-2 gem-icon"></i>
+                                    <span>30 gemas ganadas</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="progress-bar h-2.5 rounded-full" style="width: 66%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex justify-between items-center">
+                            <span class="text-sm text-blue-500">2 de 3 lecciones completadas</span>
+                            <button class="bg-[#1cb0f6] text-white px-4 py-2 rounded-full hover:bg-blue-500 transition">
+                                Continuar Módulo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="module-card bg-white rounded-2xl shadow-md overflow-hidden">
+                    <div class="flex items-center justify-between p-6 bg-[#58cc02] text-white cursor-pointer" onclick="toggleModule(this)">
+                        <div class="flex items-center space-x-4">
+                            <div class="level-badge bg-white text-[#58cc02] rounded-full w-10 h-10 flex items-center justify-center font-bold">
+                                2
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">Seguridad en Dispositivos Móviles 📱</h3>
+                                <p class="text-sm text-green-100">Módulo Intermedio</p>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-down module-toggle"></i>
+                    </div>
+                    <div class="module-content hidden p-6 bg-green-50">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <p class="mb-4">Descubre cómo proteger tu smartphone y mantener tus datos seguros.</p>
+                                <ul class="space-y-2 text-green-600">
+                                    <li>🔒 Bloqueo de dispositivos</li>
+                                    <li>🌐 Conexiones seguras</li>
+                                    <li>🚨 Detección de amenazas</li>
+                                </ul>
+                            </div>
+                            <div class="flex flex-col items-center justify-center space-y-4">
+                                <div class="flex items-center">
+                                    <i class="fas fa-gem text-yellow-500 mr-2 gem-icon"></i>
+                                    <span>45 gemas ganadas</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="progress-bar h-2.5 rounded-full" style="width: 33%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex justify-between items-center">
+                            <span class="text-sm text-green-500">1 de 3 lecciones completadas</span>
+                            <button class="bg-[#58cc02] text-white px-4 py-2 rounded-full hover:bg-green-500 transition">
+                                Continuar Módulo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="module-card bg-white rounded-2xl shadow-md overflow-hidden">
+                    <div class="flex items-center justify-between p-6 bg-purple-500 text-white cursor-pointer" onclick="toggleModule(this)">
+                        <div class="flex items-center space-x-4">
+                            <div class="level-badge bg-white text-purple-500 rounded-full w-10 h-10 flex items-center justify-center font-bold">
+                                3
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">Protección de Datos Personales 🔐</h3>
+                                <p class="text-sm text-purple-100">Módulo Avanzado</p>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-down module-toggle"></i>
+                    </div>
+                    <div class="module-content hidden p-6 bg-purple-50">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <p class="mb-4">Aprende a proteger tu información personal en línea y offline.</p>
+                                <ul class="space-y-2 text-purple-600">
+                                    <li>🏦 Protección de datos financieros</li>
+                                    <li>💻 Gestión de contraseñas</li>
+                                    <li>🌐 Navegación anónima</li>
+                                </ul>
+                            </div>
+                            <div class="flex flex-col items-center justify-center space-y-4">
+                                <div class="flex items-center">
+                                    <i class="fas fa-gem text-yellow-500 mr-2 gem-icon"></i>
+                                    <span>60 gemas ganadas</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="progress-bar h-2.5 rounded-full" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex justify-between items-center">
+                            <span class="text-sm text-purple-500">0 de 3 lecciones completadas</span>
+                            <button class="bg-purple-500 text-white px-4 py-2 rounded-full hover:bg-purple-600 transition">
+                                Comenzar Módulo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="bg-white rounded-2xl shadow-md p-12 mb-16 relative overflow-hidden mt-16">
+            <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-[#1cb0f6]/10 to-purple-500/10 opacity-50 pointer-events-none"></div>
+            <h2 class="text-3xl font-bold text-center mb-8 text-[#1cb0f6] relative z-10">¿Qué es Cyngo?</h2>
+            <div class="grid md:grid-cols-2 gap-8 items-center relative z-10">
+                <div>
+                    <p class="text-lg mb-4">Cyngo es la primera plataforma de aprendizaje de ciberseguridad que combina educación gamificada con contenido práctico y relevante.</p>
+                    <p class="text-lg mb-4">Nuestra misión es democratizar el conocimiento de seguridad digital, haciéndolo accesible, divertido y efectivo para todos.</p>
+                    <p class="text-lg">Actualmente en versión Beta, estamos trabajando para crear la experiencia de aprendizaje más innovadora en ciberseguridad.</p>
+                </div>
+                <div class="relative">
+                    <div class="absolute -top-10 -left-10 w-32 h-32 bg-[#1cb0f6]/20 rounded-full blur-2xl animate-pulse"></div>
+                    <img src="4.png" alt="Cyngo App Screenshot" class="rounded-xl shadow-lg relative z-10">
+                </div>
+            </div>
+        </section>
+
+        <section id="donate" class="text-center bg-gradient-to-r from-[#1cb0f6] to-purple-600 text-white p-12 rounded-xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-full bg-grid-white/5 pointer-events-none"></div>
+            <h2 class="text-4xl font-bold mb-6 relative z-10">Ayúdanos a Crecer</h2>
+            <p class="text-xl mb-8 relative z-10">Cyngo es un proyecto independiente. Cada donación nos ayuda a mejorar y expandir nuestra plataforma.</p>
+            <div class="flex justify-center space-x-4 relative z-10">
+                <a href="#" class="bg-white text-[#1cb0f6] px-6 py-3 rounded-full hover:bg-blue-100 transition pulse-effect">
+                    Donar con PayPal
+                </a>
+            </div>
+            <p class="mt-4 text-sm relative z-10">Cada contribución cuenta. ¡Gracias por apoyar la educación en ciberseguridad!</p>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 Cyngo. Todos los derechos reservados.</p>
+            <div class="mt-4 space-x-4">
+                <a href="#" class="hover:text-blue-400">Política de Privacidad</a>
+                <a href="#" class="hover:text-blue-400">Términos de Servicio</a>
+                <a href="#" class="hover:text-blue-400">Contacto</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleModule(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.module-toggle');
+            
+            content.classList.toggle('hidden');
+            icon.classList.toggle('fa-chevron-down');
+            icon.classList.toggle('fa-chevron-up');
+        }
+    </script>
+</body>
+</html>
