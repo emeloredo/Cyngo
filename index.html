@@ -28,6 +28,74 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
+        .modules-container {
+            position: relative;
+            height: 180px; /* Ajusta esta altura según el tamaño de tus tarjetas */
+            overflow: hidden;
+        }
+        
+        .module-card {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            transition: all 0.5s ease-in-out;
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+        }
+        
+        .module-card.active {
+            opacity: 1;
+            transform: translateY(0);
+            z-index: 10;
+            pointer-events: auto;
+        }
+        
+        .module-card.exit {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        
+        @media (max-width: 768px) {
+            .modules-container {
+                height: 200px; /* Altura ajustada para móviles */
+            }
+        }
+        
+        .progress-fill {
+            background: linear-gradient(135deg, var(--dark-blue), var(--purple));
+            transition: width 1.5s ease-in-out;
+        }
+    </style>
+    
+    <style>
+        @keyframes slide {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .comments-container {
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            width: 100%;
+        }
+
+        .comments-track {
+            display: inline-block;
+            animation: slide 30s linear infinite;
+        }
+
+        .comments-track:hover {
+            animation-play-state: paused;
+        }
+    </style>
+    <style>
         :root {
             --primary-color: #58cc02;
             --primary-hover: #46a302;
@@ -39,193 +107,227 @@
             --orange: #ff9600;
             --light-gray: #f7f7f7;
             --dark-gray: #4b4b4b;
-            --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             --btn-shadow: 0 4px 0 #3f8201;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0); }
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--light-gray);
+            background-color: #f4f7fa;
             color: var(--dark-gray);
+            scroll-behavior: smooth;
         }
 
-        .hero-gradient {
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        .gradient-text {
             background: linear-gradient(135deg, var(--dark-blue), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .primary-btn {
-            background-color: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
             color: white;
+            transition: all 0.3s ease;
             box-shadow: var(--btn-shadow);
-            transition: all 0.2s ease;
         }
 
         .primary-btn:hover {
-            background-color: var(--primary-hover);
             transform: translateY(2px);
             box-shadow: 0 2px 0 #3f8201;
         }
 
         .module-card {
-            background-color: var(--secondary-color);
-            box-shadow: var(--shadow);
             transition: all 0.3s ease;
+            transform-origin: center;
         }
 
         .module-card:hover {
-            transform: translateY(-10px);
+            transform: scale(1.03) translateY(-10px);
             box-shadow: 0 15px 30px rgba(0,0,0,0.1);
         }
 
-        .progress-fill {
-            background: linear-gradient(to right, var(--dark-blue), var(--purple));
+        .section-divider {
+            background: linear-gradient(135deg, var(--light-blue), var(--purple));
+            height: 2px;
+            width: 100px;
+            margin: 1rem auto;
         }
 
-        .streak-badge {
-            background-color: var(--light-blue);
-            color: var(--dark-blue);
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
         }
 
-        .module-badge {
-            background-color: var(--light-blue);
-            color: var(--dark-blue);
-        }
-
-        .mascot-section {
-            animation: float 4s ease-in-out infinite;
-        }
-
-        .mascot-image {
-            transition: transform 0.3s ease;
-        }
-
-        .mascot-image:hover {
-            transform: scale(1.05) rotate(2deg);
+        .floating-icon {
+            animation: float 3s ease-in-out infinite;
         }
 
         @media (max-width: 640px) {
-            .header-actions {
+            .responsive-flex {
                 flex-direction: column;
-                align-items: center;
-                gap: 0.5rem;
-            }
-
-            .hero-section {
-                padding: 2rem;
             }
 
             .hero-section h2 {
                 font-size: 2.5rem;
             }
 
-            .hero-section p {
-                font-size: 1rem;
-            }
-
             .module-section {
                 grid-template-columns: 1fr;
             }
-
-            .footer-links {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
         }
     </style>
+
+
+<style>
+    @keyframes slide {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+    .comments-container {
+        position: relative;
+        width: 100%;
+    }
+
+    .comments-track {
+        display: inline-flex;
+        animation: slide 10s linear infinite;
+        gap: 1rem;
+    }
+
+    .comments-track:hover {
+        animation-play-state: paused;
+    }
+
+    .comment-card {
+        flex-shrink: 0;
+        width: 280px;
+        transition: transform 0.3s ease;
+    }
+
+    .comment-card:hover {
+        transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+    .comments-track {
+        animation: slide 15s linear infinite; /* Más rápido en móviles */
+    }
+}
+</style>
+
+<style>
+    .floating-icon {
+        transition: transform 0.3s ease;
+    }
+    .group:hover .floating-icon {
+        animation: float 2s ease-in-out infinite;
+    }
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-15px); }
+    }
+</style>
 </head>
-<body>
-    <header class="sticky top-0 z-50 bg-white shadow-sm">
+<body class="antialiased">
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md shadow-sm">
         <nav class="container mx-auto flex flex-wrap justify-between items-center p-4">
             <div class="flex items-center w-full justify-between">
-                <h1 class="text-2xl font-bold" style="color: var(--dark-blue)">Cyngo</h1>
+                <h1 class="text-2xl font-bold gradient-text">Cyngo</h1>
                 <div class="header-actions flex items-center space-x-4">
-                    <div class="streak-badge flex items-center rounded-full px-3 py-1 hidden sm:flex">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                        </svg>
-                        <span class="font-bold">120</span>
+                    <div class="hidden sm:flex items-center space-x-4">
+                        <div class="bg-blue-50 rounded-full px-3 py-1 flex items-center">
+                            <span class="mr-2 text-orange-500">🔥</span>
+                            <span class="font-bold text-sm">5 días</span>
+                        </div>
+                        <div class="bg-green-50 rounded-full px-3 py-1 flex items-center">
+                            <span class="mr-2 text-green-500">💎</span>
+                            <span class="font-bold text-sm">120</span>
+                        </div>
                     </div>
-                    <div class="flex items-center bg-[#e5f3ff] rounded-full px-3 py-1 hidden sm:flex">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" style="color: var(--orange)" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm8.41 7h-4.22c-.4-1.54-1-3-1.8-4.36C16.34 5.14 18.54 6.84 20.4 9zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h4.58c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h4.22c.4 1.54 1 3 1.8 4.36C7.66 18.86 5.46 17.16 3.68 16zm4.22-8H3.68c1.78-1.86 4-3.56 6.32-4.36C9.1 5 8.5 6.46 8.1 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.36c.8-1.36 1.4-2.82 1.8-4.36h4.22c-1.78 1.86-4 3.56-6.32 4.36zm2.52-6.36c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h4.58c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-4.58z"/>
-                        </svg>
-                        <span class="font-bold">5 días</span>
-                    </div>
-                    <a href="https://duosec-823e0.web.app/" class="primary-btn px-4 py-2 rounded-full">
+                    <a href="https://duosec-823e0.web.app/" class="primary-btn px-4 py-2 rounded-full text-sm">
                         Iniciar Beta
                     </a>
                 </div>
             </div>
         </nav>
     </header>
-
     <main class="container mx-auto px-4 py-8">
-        <!-- New Mascot Section - Moved to the Top -->
-        <section class="mascot-section bg-[#e5f3ff] rounded-2xl p-12 text-center mb-16 overflow-hidden relative">
-            <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-[#84d8ff] to-[#ce82ff] opacity-10"></div>
+        <section class="hero-section bg-gradient-to-br from-blue-100 to-purple-100 rounded-3xl p-12 text-center mb-16 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-full opacity-10 bg-gradient-to-r from-blue-200 to-purple-200"></div>
             <div class="relative z-10">
-                <div class="flex flex-col items-center justify-center">
-                    <img src="mascota2.png" alt="Cyngo Mascota" class="mascot-image w-72 h-72 mb-6 rounded-2xl shadow-2xl hover:scale-105 transition-transform">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-4" style="color: var(--dark-blue)"></h2>
-                    <p class="text-2xl max-w-3xl mx-auto mb-6 font-semibold leading-relaxed">
-                        ¡Hola! Soy tu guardián digital, aquí para hacerte un experto en ciberseguridad de manera divertida y sencilla.
-                    </p>
-                    <a href="https://duosec-823e0.web.app/" class="primary-btn px-8 py-4 rounded-full text-lg hover:animate-pulse">
-                        Conoce Más
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 gradient-text">Aprende Ciberseguridad Jugando</h2>
+                <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto text-gray-700">
+                    Cyngo: Tu compañero divertido para convertirte en un experto en seguridad digital
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <a href="https://duosec-823e0.web.app/" class="primary-btn px-6 py-3 rounded-full text-lg">
+                        Comenzar Gratis
+                    </a>
+                    <a href="#features" class="bg-white text-blue-600 px-6 py-3 rounded-full text-lg border border-blue-200 hover:bg-blue-50 transition">
+                        Conocer Más
                     </a>
                 </div>
             </div>
         </section>
 
-        <section class="hero-section hero-gradient text-white rounded-2xl p-12 text-center mb-16">
-            <h2 class="text-4xl md:text-5xl font-bold mb-4">Aprende Ciberseguridad Jugando</h2>
-            <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto opacity-90">Cyngo: Tu compañero divertido para convertirte en un experto en seguridad digital</p>
-            <a href="https://duosec-823e0.web.app/" class="bg-white text-[--dark-blue] px-6 py-3 rounded-full hover:bg-gray-100 transition">
-                Comenzar Gratis
-            </a>
-        </section>
-
         
+       <!-- Sección de Módulos de Aprendizaje -->
+       <section class="mb-16">
+        <div class="bg-white rounded-2xl shadow-md p-8">
+            <h2 class="text-3xl font-bold text-center mb-8 gradient-text">Nuestros Módulos de Aprendizaje</h2>
+            
+            <div class="modules-slider relative">
+                <div id="modules-carousel" class="modules-container relative h-64 overflow-hidden">
+                    <!-- Los módulos se generarán con JavaScript -->
+                </div>
+            
+                <div id="module-indicators" class="flex items-center justify-center space-x-2 mt-4">
+                    <!-- Indicadores generados por JS -->
+                </div>
+            </div>
+        </div>
+    </section>
 
         <!-- Rest of the original content remains the same -->
-        <section class="module-section grid sm:grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-            <div class="module-card rounded-2xl p-6 text-center">
-                <div class="module-badge rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" style="color: var(--dark-blue)" viewBox="0 0 24 24" fill="currentColor">
+        <section id="features" class="module-section grid sm:grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+            <div class="module-card glass-morphism p-6 text-center hover:shadow-xl transition-all duration-300 group">
+                <div class="bg-blue-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 floating-icon group-hover:animate-pulse">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-600" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
                     </svg>
                 </div>
-                <h3 class="text-xl font-bold mb-2" style="color: var(--dark-blue)">Aprendizaje Interactivo</h3>
-                <p>Módulos de ciberseguridad diseñados como juegos divertidos</p>
+                <h3 class="text-xl font-bold mb-2 gradient-text">Aprendizaje Interactivo</h3>
+                <p class="text-gray-600">Módulos de ciberseguridad diseñados como juegos divertidos</p>
             </div>
-            <div class="module-card rounded-2xl p-6 text-center">
-                <div class="module-badge rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" style="color: var(--dark-blue)" viewBox="0 0 24 24" fill="currentColor">
+            <div class="module-card glass-morphism p-6 text-center hover:shadow-xl transition-all duration-300 group">
+                <div class="bg-green-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 floating-icon group-hover:animate-pulse">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-green-600" style="color: var(--dark-blue)" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M17 1H7c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zm0 19H7V5h10v15z"/>
                     </svg>
                 </div>
-                <h3 class="text-xl font-bold mb-2" style="color: var(--dark-blue)">Contenido Práctico</h3>
-                <p>Ejercicios basados en escenarios reales de seguridad</p>
+                <h3 class="text-xl font-bold mb-2 gradient-text">Contenido Práctico</h3>
+                <p class="text-gray-600">Ejercicios basados en escenarios reales de seguridad</p>
             </div>
-            <div class="module-card rounded-2xl p-6 text-center">
-                <div class="module-badge rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" style="color: var(--dark-blue)" viewBox="0 0 24 24" fill="currentColor">
+            <div class="module-card glass-morphism p-6 text-center hover:shadow-xl transition-all duration-300 group">
+                <div class="bg-purple-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 floating-icon group-hover:animate-pulse">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-purple-600" style="color: var(--dark-blue)" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
                     </svg>
                 </div>
-                <h3 class="text-xl font-bold mb-2" style="color: var(--dark-blue)">Comunidad</h3>
-                <p>Conecta con otros aprendices de ciberseguridad</p>
+                <h3 class="text-xl font-bold mb-2 gradient-text">Comunidad</h3>
+                <p class="text-gray-600">Conecta con otros aprendices de ciberseguridad</p>
             </div>
         </section>
 
@@ -250,40 +352,26 @@
             </div>
         </section>
 
-        <!-- Rest of the original content remains the same -->
+
         <section class="bg-white rounded-2xl shadow-md p-8 mb-16">
-            <h2 class="text-3xl font-bold text-center mb-8" style="color: var(--dark-blue)">Módulos de Aprendizaje</h2>
-            <div class="space-y-6">
-                <div class="bg-[#e5f3ff] rounded-2xl p-6">
-                    <div class="flex flex-col sm:flex-row items-center justify-between mb-4">
-                        <div class="flex items-center space-x-4 mb-4 sm:mb-0">
-                            <div class="module-badge rounded-full w-10 h-10 flex items-center justify-center font-bold">
-                                1
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-bold" style="color: var(--dark-blue)">Privacidad en Redes Sociales</h3>
-                                <span class="text-sm text-gray-600">Nivel Básico</span>
-                            </div>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" style="color: var(--orange)" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                            </svg>
-                            <span>30</span>
-                        </div>
+            <h2 class="text-3xl font-bold text-center mb-8" style="color: var(--dark-blue)">Lo que dicen de Cyngo</h2>
+            
+            <div class="comments-container overflow-hidden">
+                <div class="comments-track flex space-x-4">
+                    <!-- Comments will be dynamically inserted here -->
+                    <div class="flex space-x-4">
+                        <!-- Placeholder for comments -->
                     </div>
-                    <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4">
-                        <div class="progress-fill h-2.5 rounded-full" style="width: 66%"></div>
-                    </div>
-                    <div class="flex flex-col sm:flex-row justify-between items-center">
-                        <span class="text-sm text-gray-600 mb-4 sm:mb-0">2 de 3 lecciones completadas</span>
-                        <a href="https://duosec-823e0.web.app/" class="primary-btn px-4 py-2 rounded-full">
-                            Continuar
-                        </a>
+                    <div class="flex space-x-4">
+                        <!-- Duplicate of first set for seamless looping -->
                     </div>
                 </div>
             </div>
         </section>
+
+       
+
+        
 
         <!-- Enterprise Solutions Section -->
         <section class="bg-white rounded-2xl shadow-md p-8 mb-16">
@@ -365,10 +453,10 @@
             </div>
         </section>
 
-        <section class="hero-gradient text-white rounded-2xl p-12 text-center">
+        <section class="hero-gradient bg-gradient-to-br from-blue-600 to-purple-600 text-white rounded-2xl p-12 text-center">
             <h2 class="text-4xl md:text-5xl font-bold mb-4">Ayúdanos a Crecer</h2>
             <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto opacity-90">Cyngo es un proyecto independiente. Cada donación nos ayuda a mejorar nuestra plataforma.</p>
-            <a href="https://www.linkedin.com/in/marcoantoniosanz/" class="bg-white text-[--dark-blue] px-6 py-3 rounded-full hover:bg-gray-100 transition">
+            <a href="https://www.linkedin.com/in/marcoantoniosanz/" class="bg-white text-blue-600 px-6 py-3 rounded-full hover:bg-gray-100 transition">
                 Donar
             </a>
         </section>
@@ -384,5 +472,284 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        const comments = [
+            {
+                name: "Liliana Hurtado",
+                title: "Especialista Seguridad Informática",
+                text: "¡Felicidades! 🎉, estamos listos para probar la App"
+            },
+            {
+                name: "Horacio Maidana",
+                title: "Abogado-Especialista en Cibercrimen",
+                text: "Me encanta esto !!"
+            },
+            {
+                name: "Roberto Fernandez",
+                title: "Consultor SLA en Banamex",
+                text: "Súper, excelente!!! 👍"
+            },
+            {
+                name: "Mónica JM",
+                title: "Máster en Ciberseguridad",
+                text: "Impresionante, muy buen aporte y deseando probarla 👏👏👏"
+            },
+            {
+                name: "Samuel Sánchez Díaz",
+                title: "Estudiante",
+                text: "¡Felicidades! 🎉, lo he estado probando la beta y me encanta muchísimo"
+            },
+            {
+                name: "Michael Dueñas",
+                title: "Full Stack & AI Developer",
+                text: "Gran iniciativa. Hacer que la ciberseguridad sea accesible y entretenida es un gran paso."
+            },
+            {
+                name: "Andrea Rodríguez",
+                title: "Analista junior de seguridad",
+                text: "¡Qué chula! Me encantaría probarla y compartirla en mi red^^"
+            }
+        ];
+    
+        function createCommentCard(comment) {
+            const hashCode = (str) => {
+                let hash = 0;
+                for (let i = 0; i < str.length; i++) {
+                    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+                }
+                return hash;
+            };
+    
+            const stringToColor = (str) => {
+                const hash = hashCode(str);
+                const h = hash % 360;
+                return `hsl(${h}, 70%, 60%)`;
+            };
+    
+            const bgColor = stringToColor(comment.name);
+    
+            return `
+                <div class="comment-card bg-white rounded-xl shadow-md p-5 w-72 flex-shrink-0">
+                    <div class="flex items-center mb-3">
+                        <div 
+                            class="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold mr-4 shadow-md"
+                            style="background-color: ${bgColor}"
+                        >
+                            ${comment.name.charAt(0).toUpperCase()}
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg leading-tight text-gray-800">${comment.name}</h3>
+                            <p class="text-sm text-gray-500 truncate max-w-[200px]">${comment.title}</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 line-clamp-3 text-sm leading-relaxed">
+                        ${comment.text}
+                    </p>
+                </div>
+            `;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+        const commentsContainer = document.querySelector('.comments-container');
+        const commentsTrack = document.querySelector('.comments-track');
+
+        // Clear existing content
+        commentsTrack.innerHTML = '';
+
+        // Create two sets of comments for infinite scroll
+        const commentSets = [
+            document.createElement('div'),
+            document.createElement('div')
+        ];
+
+        commentSets.forEach(set => {
+            set.className = 'flex space-x-4';
+            set.innerHTML = comments.map(createCommentCard).join('');
+            commentsTrack.appendChild(set);
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Datos de los módulos (mismo que antes)
+      const modules = [
+        {
+          id: 1,
+          title: "Contraseñas y Autenticación",
+          level: "Básico",
+          icon: "🔑",
+          iconBg: "#FFF2CC",
+          completed: 10,
+          total: 10
+        },
+        {
+          id: 2,
+          title: "Navegación Segura",
+          level: "Básico",
+          icon: "🌐",
+          iconBg: "#d1f4ff",
+          completed: 10,
+          total: 10
+        },
+        {
+          id: 3,
+          title: "Defensa contra Phishing",
+          level: "Intermedio",
+          icon: "📨",
+          iconBg: "#e5f3ff",
+          completed: 10,
+          total: 10
+        },
+        {
+          id: 4,
+          title: "Protección de Datos Personales",
+          level: "Intermedio",
+          icon: "🛡️",
+          iconBg: "#e6ffe5",
+          completed: 8,
+          total: 10
+        },
+        {
+          id: 5,
+          title: "Seguridad en Dispositivos Móviles",
+          level: "Avanzado",
+          icon: "📱",
+          iconBg: "#ffecf9",
+          completed: 5,
+          total: 10
+        }
+      ];
+    
+      const modulesContainer = document.getElementById('modules-carousel');
+      let currentModuleIndex = 0;
+      let isAnimating = false;
+    
+      // Crear tarjetas de módulos
+      function createModuleCard(module) {
+        const percentage = (module.completed / module.total) * 100;
+        
+        const card = document.createElement('div');
+        card.className = 'module-card absolute w-full opacity-0 transform translate-y-12 transition-all duration-500 ease-in-out';
+        card.setAttribute('data-id', module.id);
+        
+        card.innerHTML = `
+          <div class="bg-white rounded-2xl p-6 shadow-md">
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center space-x-4">
+                <div class="module-badge rounded-full w-10 h-10 flex items-center justify-center" style="background-color: ${module.iconBg}">
+                  <span class="text-lg">${module.icon}</span>
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold text-blue-600">${module.title}</h3>
+                  <span class="text-sm text-gray-600">Nivel ${module.level}</span>
+                </div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                </svg>
+                <span>${module.completed}/${module.total}</span>
+              </div>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4 overflow-hidden">
+              <div class="progress-fill h-2.5 rounded-full" style="width: 0%"></div>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-sm text-gray-600">${module.completed} de ${module.total} lecciones completadas</span>
+              <a href="#" class="bg-green-500 text-white px-4 py-2 rounded-full hover:bg-green-600 transition shadow-md shadow-green-200">
+                Continuar
+              </a>
+            </div>
+          </div>
+        `;
+        
+        return card;
+      }
+    
+      // Inicializar los módulos
+      function initModules() {
+        modules.forEach(module => {
+          const card = createModuleCard(module);
+          modulesContainer.appendChild(card);
+        });
+        
+        // Activar el primer módulo
+        showModule(currentModuleIndex);
+      }
+    
+      // Mostrar un módulo específico y animar su barra de progreso
+      function showModule(index) {
+        if (isAnimating) return;
+        isAnimating = true;
+        
+        // Desactivar el módulo actual
+        const currentCards = document.querySelectorAll('.module-card.active');
+        currentCards.forEach(card => {
+          card.classList.remove('active');
+          card.classList.add('exit');
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(-50px)';
+        });
+        
+        // Activar el nuevo módulo
+        setTimeout(() => {
+          currentCards.forEach(card => {
+            card.classList.remove('exit');
+          });
+          
+          const newCard = document.querySelector(`.module-card[data-id="${modules[index].id}"]`);
+          newCard.classList.add('active');
+          newCard.style.opacity = '1';
+          newCard.style.transform = 'translateY(0)';
+          
+          // Animar la barra de progreso
+          const progressBar = newCard.querySelector('.progress-fill');
+          setTimeout(() => {
+            progressBar.style.width = '100%';
+            
+            // Cuando la animación termine, pasar al siguiente módulo
+            setTimeout(() => {
+              isAnimating = false;
+              currentModuleIndex = (currentModuleIndex + 1) % modules.length;
+              showModule(currentModuleIndex);
+            }, 2000); // Esperar 2 segundos después de que la barra llegue al 100%
+          }, 500); // Pequeño retraso antes de empezar a llenar la barra
+        }, 800); // Tiempo para la transición de salida
+      }
+    
+      // Agregar soporte para dispositivos móviles
+      function addMobileSupport() {
+        let touchStartX = 0;
+        let touchEndX = 0;
+    
+        modulesContainer.addEventListener('touchstart', (e) => {
+          touchStartX = e.touches[0].clientX;
+        });
+    
+        modulesContainer.addEventListener('touchend', (e) => {
+          touchEndX = e.changedTouches[0].clientX;
+          handleSwipe();
+        });
+    
+        function handleSwipe() {
+          if (touchEndX < touchStartX - 50) {
+            // Swipe left
+            currentModuleIndex = (currentModuleIndex + 1) % modules.length;
+            showModule(currentModuleIndex);
+          } else if (touchEndX > touchStartX + 50) {
+            // Swipe right
+            currentModuleIndex = (currentModuleIndex - 1 + modules.length) % modules.length;
+            showModule(currentModuleIndex);
+          }
+        }
+      }
+    
+      // Iniciar la animación y soporte móvil
+      initModules();
+      addMobileSupport();
+    });
+    </script>
 </body>
 </html>
