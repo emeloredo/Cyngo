@@ -424,7 +424,7 @@
                             <div class="bg-blue-50 p-4 rounded-lg mb-6 pixel-border">
                                 <h3 class="text-center pixel-title text-sm mb-2">Completa lecciones, gana gemas y protege tu vida digital</h3>
                                 <button class="w-full bg-blue-100 text-primary rounded-lg py-2 mt-2 flex items-center justify-center pixel-title text-xs">
-                                    <i class="fas fa-rocket mr-2"></i> Elige tu próxima misión
+                                    Elige tu próxima misión
                                 </button>
                             </div>
                             <div class="bg-gradient-to-r from-blue-900 to-cyan-500 p-4 rounded-lg mb-6 text-white pixel-border">
@@ -518,7 +518,7 @@
                 <div class="stars-container absolute top-0 left-0 w-full h-full opacity-20"></div>
                 <h2 class="pixel-title text-2xl mb-6 relative z-10">Comienza a proteger tu vida digital</h2>
                 <p class="retro-text text-xl mb-8 max-w-2xl mx-auto relative z-10">Únete a nuestra comunidad y aprende cómo mantenerte seguro en el mundo digital.</p>
-                <a href="https://duosec-823e0.web.app/" class="btn-primary relative z-10">Registrarme gratis</a>
+                <a href="https://duosec-823e0.web.app/" class="btn-primary relative z-10">Iniciar</a>
             </div>
         </div>
     </section>
@@ -540,7 +540,7 @@
                             </div>
                             <div>
                                 <h3 class="pixel-title text-sm">Seguridad en el Teletrabajo</h3>
-                                <p class="retro-text text-sm">10 lecciones interactivas</p>
+                                <p class="retro-text text-sm">70 lecciones interactivas</p>
                             </div>
                         </div>
                     </div>
@@ -567,7 +567,7 @@
                             </div>
                             <div>
                                 <h3 class="pixel-title text-sm">Seguridad Básica en Dispositivos</h3>
-                                <p class="retro-text text-sm">10 lecciones interactivas</p>
+                                <p class="retro-text text-sm">70 lecciones interactivas</p>
                             </div>
                         </div>
                     </div>
@@ -814,16 +814,16 @@
             gsap.registerPlugin(ScrollTrigger);
             
             gsap.from("#feature1", {
-                scrollTrigger: {
-                    trigger: "#feature1",
-                    start: "top bottom",
-                    end: "top center",
-                    scrub: true
-                },
-                y: 50,
-                opacity: 0,
-                duration: 1
-            });
+    scrollTrigger: {
+        trigger: "#feature1",
+        start: "top bottom",
+        end: "top center",
+        scrub: true
+    },
+    y: 50,
+    opacity: 0.7,  // Cambiado de 0 a 0.7
+    duration: 1
+});
             
             gsap.from("#feature2", {
                 scrollTrigger: {
@@ -912,6 +912,14 @@
                 document.body.classList.toggle('enable-crt');
             });
         });
+
+        // Al final de tu script
+setTimeout(function() {
+    document.querySelectorAll("#feature1, #feature2, #feature3").forEach(function(el) {
+        el.style.opacity = "1";
+        el.style.transform = "translateY(0)";
+    });
+}, 2000); // Espera 2 segundos
     </script>
 </body>
 </html>
