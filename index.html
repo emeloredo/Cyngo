@@ -13,6 +13,55 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax-js/3.1.0/parallax.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rellax/1.12.1/rellax.min.js"></script>
     <style>
+        /* Agregar al CSS existente */
+        .pixel-card-container {
+            perspective: 1000px;
+            width: 100%;
+        }
+        
+        .pixel-card-flipper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        
+        .pixel-card-container:hover .pixel-card-flipper {
+            transform: rotateY(180deg);
+        }
+        
+        .pixel-card-front, .pixel-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border: 4px solid var(--black);
+            box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+        
+        .pixel-card-front {
+            z-index: 2;
+            transform: rotateY(0deg);
+        }
+        
+        .pixel-card-back {
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%234ade80' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+        
+        .certificate-container {
+            border: 2px solid #f0b90b;
+            border-radius: 8px;
+            padding: 1rem;
+            background-color: #fffdf7;
+            box-shadow: inset 0 0 20px rgba(240, 185, 11, 0.1);
+        }
+    </style>
+    <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Oxanium:wght@300;400;500;600;700&display=swap');
         
         :root {
@@ -532,88 +581,156 @@
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="pixel-card bg-white overflow-hidden">
-                    <div class="bg-blue-400 text-white p-4">
-                        <div class="flex items-center">
-                            <div class="bg-orange-400 p-2 rounded-lg mr-3 pixel-border">
-                                <i class="fas fa-home text-white"></i>
+                <!-- Primera tarjeta con efecto flip -->
+                <div class="pixel-card-container h-96">
+                    <div class="pixel-card-flipper">
+                        <div class="pixel-card-front bg-white overflow-hidden">
+                            <div class="bg-blue-400 text-white p-4">
+                                <div class="flex items-center">
+                                    <div class="bg-orange-400 p-2 rounded-lg mr-3 pixel-border">
+                                        <i class="fas fa-home text-white"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="pixel-title text-sm">Seguridad en el Teletrabajo</h3>
+                                        <p class="retro-text text-sm">70 lecciones interactivas</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div>
-                                <h3 class="pixel-title text-sm">Seguridad en el Teletrabajo</h3>
-                                <p class="retro-text text-sm">70 lecciones interactivas</p>
+                            <div class="p-6">
+                                <p class="retro-text mb-4">Aprende a proteger tu información mientras trabajas desde casa y evita vulnerabilidades comunes.</p>
+                                <div class="mb-4">
+                                    <div class="progress-bar">
+                                        <div class="progress-value w-full"></div>
+                                    </div>
+                                    <p class="text-right retro-text text-sm text-gray-500 mt-1">10/10 completadas</p>
+                                </div>
+                                <button class="w-full bg-primary text-white py-2 rounded-lg hover:bg-primary-dark transition pixel-title text-sm">Ver curso</button>
+                            </div>
+                            <div class="ribbon">
+                                <span>Completado</span>
                             </div>
                         </div>
-                    </div>
-                    <div class="p-6">
-                        <p class="retro-text mb-4">Aprende a proteger tu información mientras trabajas desde casa y evita vulnerabilidades comunes.</p>
-                        <div class="mb-4">
-                            <div class="progress-bar">
-                                <div class="progress-value w-full"></div>
+                        <div class="pixel-card-back bg-white p-6">
+                            <div class="certificate-container">
+                                <div class="certificate-header text-center">
+                                    <i class="fas fa-award text-4xl text-yellow-500 mb-4"></i>
+                                    <h3 class="pixel-title text-xl mb-2">CERTIFICADO</h3>
+                                    <p class="retro-text">de finalización</p>
+                                </div>
+                                <div class="certificate-body text-center my-6">
+                                    <div class="border-t-2 border-b-2 border-dashed border-gray-300 py-4 my-4">
+                                        <p class="retro-text mb-2">Este certifica que has completado con éxito el curso</p>
+                                        <p class="pixel-title text-primary text-sm mb-4">Seguridad en el Teletrabajo</p>
+                                        <p class="retro-text text-sm">10 horas de formación especializada</p>
+                                    </div>
+                                </div>
+                                <div class="certificate-footer text-center">
+                                    
+                                </div>
                             </div>
-                            <p class="text-right retro-text text-sm text-gray-500 mt-1">10/10 completadas</p>
                         </div>
-                        <button class="w-full bg-primary text-white py-2 rounded-lg hover:bg-primary-dark transition pixel-title text-sm">Ver curso</button>
-                    </div>
-                    <div class="ribbon">
-                        <span>Completado</span>
                     </div>
                 </div>
                 
-                <div class="pixel-card bg-white overflow-hidden">
-                    <div class="bg-blue-400 text-white p-4">
-                        <div class="flex items-center">
-                            <div class="bg-blue-600 p-2 rounded-lg mr-3 pixel-border">
-                                <i class="fas fa-laptop text-white"></i>
+                <!-- Segunda tarjeta con efecto flip -->
+                <div class="pixel-card-container h-96">
+                    <div class="pixel-card-flipper">
+                        <div class="pixel-card-front bg-white overflow-hidden">
+                            <div class="bg-blue-400 text-white p-4">
+                                <div class="flex items-center">
+                                    <div class="bg-blue-600 p-2 rounded-lg mr-3 pixel-border">
+                                        <i class="fas fa-laptop text-white"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="pixel-title text-sm">Seguridad Básica en Dispositivos</h3>
+                                        <p class="retro-text text-sm">70 lecciones interactivas</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div>
-                                <h3 class="pixel-title text-sm">Seguridad Básica en Dispositivos</h3>
-                                <p class="retro-text text-sm">70 lecciones interactivas</p>
+                            <div class="p-6">
+                                <p class="retro-text mb-4">Protege tus dispositivos cuando trabajas desde cualquier lugar con medidas efectivas de seguridad.</p>
+                                <div class="mb-4">
+                                    <div class="progress-bar">
+                                        <div class="progress-value w-1/12"></div>
+                                    </div>
+                                    <p class="text-right retro-text text-sm text-gray-500 mt-1">1/10 completadas</p>
+                                </div>
+                                <button class="w-full bg-primary text-white py-2 rounded-lg hover:bg-primary-dark transition pixel-title text-sm">Ver curso</button>
                             </div>
                         </div>
-                    </div>
-                    <div class="p-6">
-                        <p class="retro-text mb-4">Protege tus dispositivos cuando trabajas desde cualquier lugar con medidas efectivas de seguridad.</p>
-                        <div class="mb-4">
-                            <div class="progress-bar">
-                                <div class="progress-value w-1/12"></div>
+                        <div class="pixel-card-back bg-white p-6">
+                            <div class="certificate-container">
+                                <div class="certificate-header text-center">
+                                    <i class="fas fa-award text-4xl text-yellow-500 mb-4"></i>
+                                    <h3 class="pixel-title text-xl mb-2">CERTIFICADO</h3>
+                                    <p class="retro-text">de finalización</p>
+                                </div>
+                                <div class="certificate-body text-center my-6">
+                                    <div class="border-t-2 border-b-2 border-dashed border-gray-300 py-4 my-4">
+                                        <p class="retro-text mb-2">Este certifica que has completado con éxito el curso</p>
+                                        <p class="pixel-title text-primary text-sm mb-4">Seguridad Básica en Dispositivos</p>
+                                        <p class="retro-text text-sm">8 horas de formación especializada</p>
+                                    </div>
+                                </div>
+                                <div class="certificate-footer text-center">
+                                </div>
                             </div>
-                            <p class="text-right retro-text text-sm text-gray-500 mt-1">1/10 completadas</p>
                         </div>
-                        <button class="w-full bg-primary text-white py-2 rounded-lg hover:bg-primary-dark transition pixel-title text-sm">Ver curso</button>
                     </div>
                 </div>
                 
-                <div class="pixel-card bg-white overflow-hidden">
-                    <div class="bg-blue-400 text-white p-4">
-                        <div class="flex items-center">
-                            <div class="bg-purple-600 p-2 rounded-lg mr-3 pixel-border">
-                                <i class="fas fa-shield-alt text-white"></i>
+                <!-- Tercera tarjeta con efecto flip -->
+                <div class="pixel-card-container h-96">
+                    <div class="pixel-card-flipper">
+                        <div class="pixel-card-front bg-white overflow-hidden">
+                            <div class="bg-blue-400 text-white p-4">
+                                <div class="flex items-center">
+                                    <div class="bg-purple-600 p-2 rounded-lg mr-3 pixel-border">
+                                        <i class="fas fa-shield-alt text-white"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="pixel-title text-sm">Contraseñas y Autenticación</h3>
+                                        <p class="retro-text text-sm">8 lecciones interactivas</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div>
-                                <h3 class="pixel-title text-sm">Contraseñas y Autenticación</h3>
-                                <p class="retro-text text-sm">8 lecciones interactivas</p>
+                            <div class="p-6">
+                                <p class="retro-text mb-4">Aprende a crear y gestionar contraseñas seguras y a utilizar métodos modernos de autenticación.</p>
+                                <div class="mb-4">
+                                    <div class="progress-bar">
+                                        <div class="progress-value w-0"></div>
+                                    </div>
+                                    <p class="text-right retro-text text-sm text-gray-500 mt-1">0/8 completadas</p>
+                                </div>
+                                <button class="w-full bg-primary text-white py-2 rounded-lg hover:bg-primary-dark transition pixel-title text-sm">Comenzar</button>
                             </div>
                         </div>
-                    </div>
-                    <div class="p-6">
-                        <p class="retro-text mb-4">Aprende a crear y gestionar contraseñas seguras y a utilizar métodos modernos de autenticación.</p>
-                        <div class="mb-4">
-                            <div class="progress-bar">
-                                <div class="progress-value w-0"></div>
+                        <div class="pixel-card-back bg-white p-6">
+                            <div class="certificate-container">
+                                <div class="certificate-header text-center">
+                                    <i class="fas fa-award text-4xl text-yellow-500 mb-4"></i>
+                                    <h3 class="pixel-title text-xl mb-2">CERTIFICADO</h3>
+                                    <p class="retro-text">de finalización</p>
+                                </div>
+                                <div class="certificate-body text-center my-6">
+                                    <div class="border-t-2 border-b-2 border-dashed border-gray-300 py-4 my-4">
+                                        <p class="retro-text mb-2">Este certifica que has completado con éxito el curso</p>
+                                        <p class="pixel-title text-primary text-sm mb-4">Contraseñas y Autenticación</p>
+                                        <p class="retro-text text-sm">5 horas de formación especializada</p>
+                                    </div>
+                                </div>
+                                <div class="certificate-footer text-center">
+                                </div>
                             </div>
-                            <p class="text-right retro-text text-sm text-gray-500 mt-1">0/8 completadas</p>
                         </div>
-                        <button class="w-full bg-primary text-white py-2 rounded-lg hover:bg-primary-dark transition pixel-title text-sm">Comenzar</button>
                     </div>
                 </div>
             </div>
             
             <div class="text-center mt-12">
-                <div class="text-center mt-12">
-                    <a href="https://duosec-823e0.web.app/" class="btn-secondary">
-                        Ver MAS
-                    </a>
-                </div>
+                <a href="https://duosec-823e0.web.app/" class="btn-secondary">
+                    Ver MAS
+                </a>
             </div>
         </div>
     </section>
