@@ -826,29 +826,27 @@
             
             gsap.from("#feature2", {
                 scrollTrigger: {
-                    trigger: "#feature2",
-                    start: "top bottom",
-                    end: "top center",
-                    scrub: true
-                },
-                y: 50,
-                opacity: 0,
-                duration: 1,
-                delay: 0.2
-            });
+        trigger: "#feature1",
+        start: "top bottom",
+        end: "top center",
+        scrub: true
+    },
+    y: 50,
+    opacity: 0.7,  // Cambiado de 0 a 0.7
+    duration: 1
+});
             
             gsap.from("#feature3", {
                 scrollTrigger: {
-                    trigger: "#feature3",
-                    start: "top bottom",
-                    end: "top center",
-                    scrub: true
-                },
-                y: 50,
-                opacity: 0,
-                duration: 1,
-                delay: 0.4
-            });
+        trigger: "#feature1",
+        start: "top bottom",
+        end: "top center",
+        scrub: true
+    },
+    y: 50,
+    opacity: 0.7,  // Cambiado de 0 a 0.7
+    duration: 1
+});
             
             // Canvas background
             const canvas = document.getElementById('canvas-background');
